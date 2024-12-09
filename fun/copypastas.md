@@ -11,7 +11,7 @@ snippet: "Computer copypastas."
 ---
 
 ## Rust Copypasta
-Of course Rust is superior to `[insert programming language]`/You should use
+Of course Rust is superior to `[insert programming language]`. You should use
 Rust for `[insert project]` because you get:
 
 * Zero-cost abstractions
@@ -73,7 +73,7 @@ if whatever > 10 {
 }
 ```
 
-  But this is wrong:
+But this is wrong:
 
 ``` go
 if whatever > 10
@@ -81,8 +81,8 @@ if whatever > 10
   // do whatever
 }
 ```
-  They justify it [in the FAQ](https://golang.org/doc/faq#semicolons). They are
-  Google, they are special.
+They justify it [in the FAQ](https://golang.org/doc/faq#semicolons). They are
+Google, they are special.
 
 ## Seinfeld and JavaScript by Jamie
 What is the deal with JavaScript? Is it a java or is it a script?

@@ -10,7 +10,7 @@ snippet: "[Semgrep](https://semgrep.dev/) stuff that I always forget."
 ---
 
 # Semgrep on Windows via WSL
-As of today (November 2022), **you cannot run Semgrep directly on Windows**.
+As of today (November 2023), **you cannot run Semgrep directly on Windows**.
 Seriously, save your sanity and don't try. But you can run it in the
 [Windows Subsystem for Linux][wsl].
 
@@ -101,13 +101,17 @@ curl https://semgrep.dev/c/p/default
 * Run the manually created "catch them all" scan: `--config p/default`.
 
 Note: Semgrep is intelligent and detects a file's language by extension so it
-will not every rule on every file.
+will not run every rule on every file. See
+[Language extensions and languages key values][lang].
 
-# Writing Rules
+[lang]: https://semgrep.dev/docs/writing-rules/rule-syntax/#language-extensions-and-languages-key-values
+
+# Sample Rules
+Some fun things to do with Semgrep.
 
 ## Double Matches with Different Semgrep Messages
 I was printing the type of a metavariable.
-https://semgrep.dev/playground/s/parsiya:tips-double-match
+https://semgrep.dev/playground/r/L1UB80/parsiya.tips-double-match
 
 ```yaml
 rules:
@@ -146,11 +150,11 @@ org.foo.bar.MyType
 ```
 
 ### Fix
-One fix (credit: [Lewis Ardern, r2c][lewis-gh],
+One fix (credit: [Lewis Ardern, Semgrep][lewis-gh],
 [source][lewis-double-match-answer]) is to add it to `focus-metavariable`. Note,
 how we need to add `patterns` to have `focus-metavariable` as a tag.
 
-https://semgrep.dev/playground/s/parsiya:tips-double-match-fix
+https://semgrep.dev/playground/r/8GUn82/parsiya.tips-double-match-fix
 
 ```yaml
 rules:
@@ -168,7 +172,7 @@ rules:
 [lewis-gh]: https://github.com/LewisArdern
 
 ### Explanation
-Credit: [Iago Abal][iago-gh], r2c, [source on Semgrep slack][iago-double-match-answer].
+Credit: [Iago Abal][iago-gh], Semgrep, [source on Semgrep slack][iago-double-match-answer].
 
 [iago-gh]: https://github.com/IagoAbal
 [iago-double-match-answer]: https://r2c-community.slack.com/archives/C018NJRRCJ0/p1666705798027529?thread_ts=1666654882.737839&cid=C018NJRRCJ0
@@ -212,10 +216,10 @@ pattern: |
   public $RETURNTYPE $METHOD(...) { ... }
 ```
 
-https://semgrep.dev/playground/s/parsiya:tips-java-annotations
+https://semgrep.dev/playground/r/gxU0Q9/parsiya.tips-java-annotations
 
 ### Fix
-Credit: [Cooper Pierce][cooper-gh], r2c, [source on Semgrep slack][annotation-answer].
+Credit: [Cooper Pierce][cooper-gh], Semgrep, [source on Semgrep slack][annotation-answer].
 
 > annotations beyond those specified are ignored when matching so something like
 > [the following] would do what you describe
@@ -236,7 +240,7 @@ rules:
       - java
 ```
 
-https://semgrep.dev/playground/s/parsiya:tips-java-annotations-fix
+https://semgrep.dev/playground/r/3qUbAk/parsiya.tips-java-annotations-fix
 
 ## pattern-inside AND & OR
 This is `AND`. The match must satisfy both.
@@ -259,7 +263,7 @@ Capture Conditions of `if` Statements in C/C++: `if ($X)`.
 
 Capture `if` conditions with one line blocks.
 
-https://semgrep.dev/playground/s/parsiya:tips-detect-single-line-if-block
+https://semgrep.dev/playground/r/5rUED4/parsiya.tips-detect-single-line-if-block
 
 ```yaml
 rules:
@@ -273,7 +277,7 @@ rules:
     severity: WARNING
 ```
 
-Credit: [Cooper Pierce][cooper-gh], r2c, [source on Semgrep slack][single-block-if].
+Credit: [Cooper Pierce][cooper-gh], Semgrep, [source on Semgrep slack][single-block-if].
 
 [single-block-if]: https://r2c-community.slack.com/archives/C018NJRRCJ0/p1660943282982279?thread_ts=1660942419.479839&cid=C018NJRRCJ0
 
@@ -288,7 +292,7 @@ multi-dimensional arrays like `int nDim_init[10][10][10][10][10][10];`.
 > `...` is usually reserved to match a sequence of things (e.g., `foo(...)`), or
 > if something is optional (e.g., `return ...;`)
 
-Credit: [Padioleau Yoann][yoann-gh], r2c, [source: Semgrep slack][c-ellipsis].
+Credit: [Padioleau Yoann][yoann-gh], Semgrep, [source: Semgrep slack][c-ellipsis].
 
 [yoann-gh]: https://github.com/aryx
 [c-ellipsis]: https://r2c-community.slack.com/archives/C018NJRRCJ0/p1648051884724009?thread_ts=1648001009.133229&cid=C018NJRRCJ0
@@ -312,7 +316,7 @@ rules:
       - /paths/to/exclude/*
 ```
 
-https://semgrep.dev/playground/s/parsiya:detect-file
+https://semgrep.dev/playground/r/eqUAk3/parsiya.detect-file
 
 The path is relative to where you run Semgrep. The file doesn't need to have
 any content. [paths > include/exclude][paths] should give us a lot of power to
@@ -345,7 +349,7 @@ The rule takes advantage of having creating a union of six different
 everything after all six patterns are met.
 
 Semgrep playground link:
-https://semgrep.dev/playground/s/parsiya:three-imports-used.
+https://semgrep.dev/playground/r/2ZUkgL/parsiya.three-imports-used.
 
 ```yaml
 rules:
@@ -439,6 +443,6 @@ to rename the test file `some-rule-NAME.cpp`.
 # Memes
 
 ## You Made This?
-Credit: Yours Truly, Parsia.
+Edits to the famous comic: Yours Truly, Parsia.
 
 ![You Made This?](you-made-this.png)
